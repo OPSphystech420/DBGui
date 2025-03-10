@@ -4,6 +4,14 @@ What project stands behind this repository? A really cool immediate mode graphic
 
 The goals are: 1) easily portable, 2) functionality is over a basic one, 3) cross platform 
 
+**Only MacOS is currently supported**
+
 ![DBGui](images/DBGUI.png)
+
+## Current stage of the project:
+
+- Database connection via credentials (host, username, password, database, port)
+
+- Database SQL query execution editor console, with a little of options
 
 ![DBEditor](images/editor.png)
