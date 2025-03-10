@@ -12,6 +12,6 @@ The goals are: 1) easily portable, 2) functionality is over a basic one, 3) cros
 
 - Database connection via credentials (host, username, password, database, port)
 
-- Database SQL query execution editor console, with a little of options
+- SQL query execution editor console, with a little of options and table child window
 
 ![DBEditor](images/editor.png)
