@@ -5,3 +5,5 @@ What project stands behind this repository? A really cool immediate mode graphic
 The goals are: 1) easily portable, 2) functionality is over a basic one, 3) cross platform 
 
 ![DBGui](images/DBGUI.png)
+
+![DBEditor](images/editor.png)
