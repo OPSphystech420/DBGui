@@ -4,7 +4,7 @@ What project stands behind this repository? A really cool immediate mode graphic
 
 The goals are: 1) easily portable into other projects, 2) functionality over a basic one, 3) cross platform 
 
-**Only MacOS is currently supported**
+**Only MacOS with MySQL/MariaDB clinets is currently supported**
 
 ![DBGui](images/DBGUI.png)
 
