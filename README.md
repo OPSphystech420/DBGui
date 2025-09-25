@@ -1,23 +1,24 @@
-What's this? It's a new repository which is currently in a build phase!
 
-What project stands behind this repository? A really cool immediate mode graphical user interface for **database** management using most popular RDBMS and modified ImGui library for cool designs! 
+DBGui  —  client application with an Immediate Mode GUI interface for managing and administering personal databases. The application supports MacOS and MariaDB/MySQL databases. The program is written in Objective-C++ and uses the following libraries: ImGui (with modifications), MariaDB, MySQL, curl, openssl, rapidjson and others. The main idea behind communication with the database is to implement a server backend and frontend, where the C++ client uses curl requests to the server written in Go, which directly executes requests to the database.
 
-The goals are: 1) easily portable into other projects, 2) functionality over a basic one, 3) cross platform 
+## Goals
 
-**Only MacOS with MySQL/MariaDB clinets is currently supported**
+- Real-time database management, easily portable into other projects, cross-platform 
+- erforming administrative tasks using an intuitive interface, functionality over a basic one
+- Testing and demonstrating the principles of client-server interaction
 
+## Current stage
 
-## Current stage of the project:
+- Database connection via credentials **(host, username, password, database, port)**
+- SQL query execution editor console, with a little of options and tables child window
 
-- Database connection via credentials (host, username, password, database, port)
-
-- SQL query execution editor console, with a little of options and table child window
-
-<p align="center">
-  <img src="/images/editor.jpeg" width="1000" />
+<p float="left" align="center">
+  <img src="/images/editor.jpeg" width="500" />
+  <img src="/images/login.jpeg" width="270" /> 
 </p>
 
-<p float="left">
-  <img src="/images/login.jpeg" width="400" /> 
-  <img src="images/_DBGUI.png" width="300" />
+---
+
+<p align="center">
+    <img src="images/_DBGUI.png" width="770" />
 </p>
