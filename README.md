@@ -6,7 +6,6 @@ The goals are: 1) easily portable into other projects, 2) functionality over a b
 
 **Only MacOS with MySQL/MariaDB clinets is currently supported**
 
-![DBGui](images/_DBGUI.png)
 
 ## Current stage of the project:
 
@@ -14,4 +13,13 @@ The goals are: 1) easily portable into other projects, 2) functionality over a b
 
 - SQL query execution editor console, with a little of options and table child window
 
-![DBEditor](images/editor.png)
+<p align="center">
+  <img src="/images/editor.jpeg" width="1000" />
+</p>
+
+---
+
+<p float="left">
+  <img src="/images/login.jpeg" width="500" /> 
+  <img src="images/_DBGUI.png" width="500" />
+</p>
