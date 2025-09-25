@@ -24,3 +24,12 @@
   <img src="/images/editor.jpeg" width="500" />
   <img src="/images/login.jpeg" width="270" /> 
 </p>
+
+### Database Logical Model
+
+<p align="center">
+    <img src="extra/SQL/models/dbgui_logical.png" width="770" />
+</p>
+
+
+See Physical Model [here](extra/SQL/)
