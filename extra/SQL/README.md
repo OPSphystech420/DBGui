@@ -1,4 +1,4 @@
-### [Physical model](/models/physical_model.md)
+### [Physical model](models/physical_model.md)
 —   structure of tables, fields, data types, and constraints.
 
 ### Contents
