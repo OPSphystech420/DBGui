@@ -2023,14 +2023,16 @@ void CTextEditor::HandleKeyboardInputs(bool aParentIsFocused)
 		//ImGui::CaptureKeyboardFromApp(true);
 
 		ImGuiIO& io = ImGui::GetIO();
-		auto isOSX = io.ConfigMacOSXBehaviors;
-		auto alt = io.KeyAlt;
-		auto ctrl = io.KeyCtrl;
-		auto shift = io.KeyShift;
-		auto super = io.KeySuper;
+        auto isOSX = io.ConfigMacOSXBehaviors;
+        auto alt = io.KeyAlt;
+        auto ctrl = io.KeyCtrl;
+        auto shift = io.KeyShift;
+        auto super = io.KeySuper;
 
-		auto isShortcut = (isOSX ? (super && !ctrl) : (ctrl && !super)) && !alt && !shift;
-		auto isShiftShortcut = (isOSX ? (super && !ctrl) : (ctrl && !super)) && shift && !alt;
+    //    auto isShortcut = (isOSX ? (super && !ctrl) : (ctrl && !super)) && !alt && !shift;
+  //     auto isShiftShortcut = (isOSX ? (super && !ctrl) : (ctrl && !super)) && shift && !alt;
+        auto isShortcut = (isOSX ? ((super || ctrl)) : (ctrl && !super)) && !alt && !shift;
+        auto isShiftShortcut = (isOSX ? ((super || ctrl)) : (ctrl && !super)) && shift && !alt;
 		auto isWordmoveKey = isOSX ? alt : ctrl;
 		auto isAltOnly = alt && !ctrl && !shift && !super;
 		auto isCtrlOnly = ctrl && !alt && !shift && !super;

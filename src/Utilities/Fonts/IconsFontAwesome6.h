@@ -3,8 +3,6 @@
 // for use with https://github.com/FortAwesome/Font-Awesome/blob/6.x/webfonts/fa-regular-400.ttf, https://github.com/FortAwesome/Font-Awesome/blob/6.x/webfonts/fa-solid-900.ttf
 #pragma once
 
-#include "IconsFontAwesome6_Bytes.h"
-
 #define ICON_MIN_FA 0xe005
 #define ICON_MAX_16_FA 0xf8ff
 #define ICON_MAX_FA 0xf8ff

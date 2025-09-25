@@ -7,22 +7,24 @@
 
 #pragma once
 
-#import <Foundation/Foundation.h>
-#import <MariaDBKit/MariaDBKit.h>
+#include "include.h"
 
-#include <openssl/sha.h>
-
-#include "imgui.h"
-#include "Fonts.h"
 #include "CTextEditor.h"
 #include "DBGUI.hpp"
 
-#include <thread>
-#include <mutex>
-#include <atomic>
-#include <vector>
-#include <cstdlib>
-#include <cstring>
+#if TARGET_OS_OSX
+  #import <AppKit/AppKit.h>
+  #define WIN_W  ( [NSScreen mainScreen].frame.size.width  )
+  #define WIN_H  ( [NSScreen mainScreen].frame.size.height )
+  
+#elif TARGET_OS_IOS
+  #import <UIKit/UIKit.h>
+  #define WIN_W  ( [UIScreen mainScreen].bounds.size.width  )
+  #define WIN_H  ( [UIScreen mainScreen].bounds.size.height )
+  
+#else
+  #error “Unsupported platform for WIN_W / WIN_H macros”
+#endif
 
 class DBManager {
 public:
@@ -209,4 +211,38 @@ private:
             QueryInProgress.store(false);
         }
     }
+    
+public:
+    void ShowAuthWindow();
+
+private:
+    bool RegisterUser();
+    bool LoginUser();
+
+    enum class AuthState { LoggedOut, LoggedIn };
+    AuthState   AuthStatus   = AuthState::LoggedOut;
+    int         CurrentUserId{0};
+    char        AuthMsg[256]{};
+
+    char RegEmail[100]{}, RegFullName[100]{}; // RegUsername[64]{}, RegPassword[64]{}
+    char LoginUsername[64]{}, LoginPassword[64]{};
+    
+    bool bChangedRole;
+    
+    enum class UserRoles { Admin, Beta, Community, Undefined };
+    UserRoles   UserRole = UserRoles::Undefined;
+    
+    void ShowLoginTab();
+    void ShowRegisterTab();
+
+private:
+    std::atomic_bool TablesLoading{false};
+    std::vector<std::string> TableNames;
+    std::mutex               TablesMutex;
+    std::atomic_bool         TablesReady{false};
+
+    void RefreshTableListAsync();
+    void RefreshTableListWorker();
+    void RunQueryAsync(const std::string& sql);
 };
+

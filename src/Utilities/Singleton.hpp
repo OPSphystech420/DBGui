@@ -31,7 +31,7 @@ protected:
 #include <atomic>
 
 template<typename T>
-class SingletonDestroyProbe
+class SingletonDestructPattern
 {
 public:
     
@@ -69,14 +69,14 @@ public:
 
 protected:
     
-    SingletonDestroyProbe() = default;
-    virtual ~SingletonDestroyProbe() = default;
+    SingletonDestructPattern() = default;
+    virtual ~SingletonDestructPattern() = default;
 
-    SingletonDestroyProbe(const SingletonDestroyProbe&) = delete;
-    SingletonDestroyProbe& operator=(const SingletonDestroyProbe&) = delete;
+    SingletonDestructPattern(const SingletonDestructPattern&) = delete;
+    SingletonDestructPattern& operator=(const SingletonDestructPattern&) = delete;
 
-    SingletonDestroyProbe(SingletonDestroyProbe&&) = delete;
-    SingletonDestroyProbe& operator=(SingletonDestroyProbe&&) = delete;
+    SingletonDestructPattern(SingletonDestructPattern&&) = delete;
+    SingletonDestructPattern& operator=(SingletonDestructPattern&&) = delete;
 
 private:
 
@@ -95,13 +95,13 @@ private:
 };
 
 template<typename T>
-std::atomic<T*> SingletonDestroyProbe<T>::instance_{nullptr};
+std::atomic<T*> SingletonDestructPattern<T>::instance_{nullptr};
 
 template<typename T>
-std::unique_ptr<T, typename SingletonDestroyProbe<T>::Deleter> SingletonDestroyProbe<T>::instanceOwner_{nullptr};
+std::unique_ptr<T, typename SingletonDestructPattern<T>::Deleter> SingletonDestructPattern<T>::instanceOwner_{nullptr};
 
 template<typename T>
-std::mutex SingletonDestroyProbe<T>::instanceMutex_;
+std::mutex SingletonDestructPattern<T>::instanceMutex_;
 
 
 #endif // SINGLETON_H

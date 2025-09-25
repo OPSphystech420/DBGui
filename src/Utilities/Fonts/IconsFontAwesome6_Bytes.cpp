@@ -1,4 +1,4 @@
-#include "IconsFontAwesome6_Bytes.h"
+#include "Fonts.h"
 
 const unsigned int fa6_solid_compressed_size = 234315;
 const unsigned int fa6_solid_compressed_data[234316/4] =

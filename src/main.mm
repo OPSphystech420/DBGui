@@ -6,22 +6,10 @@
 // - Documentation        https://dearimgui.com/docs (same as your local docs/ folder).
 // - Introduction, links and more at the top of imgui.cpp
 
-#import <Foundation/Foundation.h>
+#include "include.h"
 
 #include "DBManager.h"
 
-#if TARGET_OS_OSX
-#import <Cocoa/Cocoa.h>
-#else
-#import <UIKit/UIKit.h>
-#endif
-
-#import <Metal/Metal.h>
-#import <MetalKit/MetalKit.h>
-
-#include "Fonts.h"
-
-#include "imgui.h"
 #include "imgui_impl_metal.h"
 #if TARGET_OS_OSX
 #include "imgui_impl_osx.h"
@@ -44,6 +32,9 @@
 
 @implementation AppViewController
 
+ImFont* FiraCode;
+ImFont* TabsFont;
+
 -(instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -57,27 +48,25 @@
         abort();
     }
 
-    // Setup Dear ImGui context
-    // FIXME: This example doesn't have proper cleanup...
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
     
-    io.Fonts->Clear();
+    IOFont &FontManager = IOFont::GetInstance();
     
-    FontRanges &ranges = FontRanges::GetInstance();
+    // 1.
+    FontManager.AddFontDefault();
     
-    io.Fonts->AddFontDefault();
+    // 2.
+    FontManager.AddFont(IOFont::Font::FontAwesome, 14.0f, true);
+    
+    // 3.
+    FiraCode = FontManager.AddFont(IOFont::Font::NotoSansMedium, 17.0f, false, nullptr,
+                                   [](ImFontConfig& cfg) { cfg.OversampleH = 3; cfg.OversampleV = 3; });
+    
+    
+    TabsFont = FontManager.AddFont(IOFont::Font::FontAwesome, 18.0f, true);
 
-    // ImFontConfig font_config; font_config.FontDataOwnedByAtlas = false;
-    // io.Fonts->AddFontFromMemoryCompressedTTF(NSMFont_compressed_data, NSMFont_compressed_size, 17.f, &font_config, ranges.latin_ranges);
-    
-    ImFontConfig fa_config; fa_config.MergeMode = true; fa_config.PixelSnapH = true; fa_config.FontDataOwnedByAtlas = false;
-    io.Fonts->AddFontFromMemoryCompressedTTF(fa6_solid_compressed_data, fa6_solid_compressed_size, 14.f, &fa_config, ranges.icons_ranges_max);
-
-    FontRanges::DestroyInstance();
+    IOFont::DestroyInstance();
     
     // Setup Renderer backend
     ImGui_ImplMetal_Init(_device);
@@ -140,7 +129,6 @@
     static ImVec4 clear_color = ImVec4(0.31f, 0.43f, 0.35f, 1.00f);
     
     DBManager::GetInstance().ShowSqlDatabaseEditor();
-
     // Rendering
     ImGui::Render();
     ImDrawData* draw_data = ImGui::GetDrawData();
@@ -156,6 +144,7 @@
     [commandBuffer presentDrawable:view.currentDrawable];
     [commandBuffer commit];
 }
+
 
 -(void)mtkView:(MTKView*)view drawableSizeWillChange:(CGSize)size
 {
@@ -232,6 +221,37 @@
 {
     return YES;
 }
+
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
+    printf("hello");
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText:@"Save Settings?"];
+    [alert setInformativeText:@"Do you want to save your settings before quitting?"];
+    [alert addButtonWithTitle:@"Yes"];
+    [alert addButtonWithTitle:@"No"];
+    [alert addButtonWithTitle:@"Cancel"];
+    
+    NSModalResponse response = [alert runModal];
+    
+    if (response == NSAlertFirstButtonReturn) {
+        // Execute your save code here.
+        [self saveSettings];
+        return NSTerminateNow;
+    } else if (response == NSAlertSecondButtonReturn) {
+        // Quit without saving.
+        return NSTerminateNow;
+    } else {
+        // Cancel the termination.
+        return NSTerminateCancel;
+    }
+}
+
+// Example saveSettings method (implement your logic)
+- (void)saveSettings {
+    NSLog(@"Settings saved.");
+    // Add your settings saving logic here.
+}
+
 
 -(instancetype)init
 {
