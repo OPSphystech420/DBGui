@@ -17,9 +17,7 @@ The goals are: 1) easily portable into other projects, 2) functionality over a b
   <img src="/images/editor.jpeg" width="1000" />
 </p>
 
----
-
 <p float="left">
-  <img src="/images/login.jpeg" width="500" /> 
-  <img src="images/_DBGUI.png" width="500" />
+  <img src="/images/login.jpeg" width="400" /> 
+  <img src="images/_DBGUI.png" width="300" />
 </p>
